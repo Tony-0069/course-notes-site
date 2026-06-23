@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 
+const API_BASE = import.meta.env.PROD ? 'https://course-notes-site-qyz8.onrender.com' : ''
+
 const text = {
   loading: '\u8f09\u5165\u5f8c\u7aef\u8cc7\u6599\u5eab\u4e2d',
   connected: '\u5df2\u9023\u7dda\u5230\u5f8c\u7aef\u8cc7\u6599\u5eab',
@@ -66,7 +68,7 @@ function ProjectPage() {
   const [form, setForm] = useState(emptyForm)
 
   useEffect(() => {
-    fetch('/api/notes').then((response) => {
+    fetch(API_BASE + '/api/notes').then((response) => {
       if (!response.ok) throw new Error('API unavailable')
       return response.json()
     }).then((data) => {
@@ -101,18 +103,18 @@ function ProjectPage() {
     event.preventDefault()
     const payload = { ...form, updatedAt: new Date().toISOString().slice(0, 10) }
     if (editingId) {
-      fetch('/api/notes/' + encodeURIComponent(editingId), { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).then((response) => { if (!response.ok) throw new Error('Update failed'); return response.json() }).then((updatedNote) => { setNotes((current) => current.map((note) => (note.id === editingId ? updatedNote : note))); setStatus(text.updated); resetForm() }).catch(() => { const nextNotes = notes.map((note) => (note.id === editingId ? { ...note, ...payload } : note)); saveFallback(nextNotes); setStatus(text.updatedLocal); resetForm() })
+      fetch(API_BASE + '/api/notes/' + encodeURIComponent(editingId), { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }).then((response) => { if (!response.ok) throw new Error('Update failed'); return response.json() }).then((updatedNote) => { setNotes((current) => current.map((note) => (note.id === editingId ? updatedNote : note))); setStatus(text.updated); resetForm() }).catch(() => { const nextNotes = notes.map((note) => (note.id === editingId ? { ...note, ...payload } : note)); saveFallback(nextNotes); setStatus(text.updatedLocal); resetForm() })
       return
     }
     const nextNote = { id: crypto.randomUUID(), ...payload }
-    fetch('/api/notes', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(nextNote) }).then((response) => { if (!response.ok) throw new Error('Save failed'); return response.json() }).then((savedNote) => { setNotes((current) => [savedNote, ...current]); setStatus(text.saved); resetForm() }).catch(() => { saveFallback([nextNote, ...notes]); setStatus(text.savedLocal); resetForm() })
+    fetch(API_BASE + '/api/notes', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(nextNote) }).then((response) => { if (!response.ok) throw new Error('Save failed'); return response.json() }).then((savedNote) => { setNotes((current) => [savedNote, ...current]); setStatus(text.saved); resetForm() }).catch(() => { saveFallback([nextNote, ...notes]); setStatus(text.savedLocal); resetForm() })
   }
 
   const handleDelete = (noteId) => {
     const target = notes.find((note) => note.id === noteId)
     const confirmed = window.confirm('\u78ba\u5b9a\u8981\u522a\u9664\u300c' + (target?.title || '\u9019\u7bc7\u7b46\u8a18') + '\u300d\u55ce\uff1f')
     if (!confirmed) return
-    fetch('/api/notes/' + encodeURIComponent(noteId), { method: 'DELETE' }).then((response) => { if (!response.ok) throw new Error('Delete failed'); return response.json() }).then(() => { setNotes((current) => current.filter((note) => note.id !== noteId)); setStatus(text.deleted); if (editingId === noteId) resetForm() }).catch(() => setStatus(text.deleteFailed))
+    fetch(API_BASE + '/api/notes/' + encodeURIComponent(noteId), { method: 'DELETE' }).then((response) => { if (!response.ok) throw new Error('Delete failed'); return response.json() }).then(() => { setNotes((current) => current.filter((note) => note.id !== noteId)); setStatus(text.deleted); if (editingId === noteId) resetForm() }).catch(() => setStatus(text.deleteFailed))
   }
 
   return (
