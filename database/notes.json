@@ -1,0 +1,29 @@
+[
+  {
+    "id": "html-css",
+    "title": "HTML 與 CSS 基礎",
+    "course": "第一週",
+    "category": "前端基礎",
+    "summary": "整理語意化標籤、盒模型、排版與 RWD 的核心觀念。",
+    "content": "HTML 負責內容結構，CSS 負責畫面呈現。使用 flex、grid 與 media query 可以讓網站在手機與電腦上都容易閱讀。",
+    "updatedAt": "2026-05-02"
+  },
+  {
+    "id": "javascript-dom",
+    "title": "JavaScript 與 DOM 操作",
+    "course": "第三週",
+    "category": "互動設計",
+    "summary": "記錄事件監聽、表單處理、陣列方法與資料渲染。",
+    "content": "JavaScript 可以接收使用者輸入，透過 state 或 DOM 更新畫面。表單送出前要驗證欄位，避免空資料進入資料庫。",
+    "updatedAt": "2026-05-16"
+  },
+  {
+    "id": "backend-database",
+    "title": "後端 API 與資料庫",
+    "course": "第八週",
+    "category": "後端資料庫",
+    "summary": "用 API 儲存課程筆記，讓前端不只是一個靜態頁面。",
+    "content": "前端透過 fetch 呼叫後端 API。後端接收資料後寫入 JSON 資料庫，重新整理頁面後資料仍然存在。",
+    "updatedAt": "2026-06-10"
+  }
+]
