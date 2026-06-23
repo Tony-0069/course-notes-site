@@ -1,0 +1,85 @@
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-strong: #101828;
+  --text: #4b5565;
+  --text-h: #111827;
+  --muted: #697586;
+  --border: #d9e1ec;
+  --accent: #0f766e;
+  --accent-strong: #134e4a;
+  --accent-soft: #d9f3ef;
+  --gold: #b7791f;
+  --rose: #be4867;
+  --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
+  --sans: system-ui, 'Segoe UI', Roboto, 'Noto Sans TC', sans-serif;
+  --mono: 'SFMono-Regular', Consolas, monospace;
+  font: 16px/1.6 var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--text-h);
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 7vw, 5.8rem);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(1.55rem, 3vw, 2.35rem);
+  font-weight: 760;
+}
+
+h3 {
+  font-size: 1.15rem;
+}
+
+a {
+  color: inherit;
+}
